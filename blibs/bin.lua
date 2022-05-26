@@ -15,10 +15,8 @@ end
 
 function bin.readnum(text)
 	local insertion
-	if text == nil then text = "Text: " end
 	while (insertion == nil) do
-		insertion = nil
-		print(text)
+		print(text or "Insert: ")
 		insertion = io.read("number")
 		io.read()
 	end
