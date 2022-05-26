@@ -17,10 +17,10 @@ function bin.readnum(text)
 	local insertion
 	if text == nil then text = "Text: " end
 	while (insertion == nil) do
-		if insertion ~= nil then break end
 		insertion = nil
 		print(text)
 		insertion = io.read("number")
+		io.read()
 	end
 	return insertion
 end

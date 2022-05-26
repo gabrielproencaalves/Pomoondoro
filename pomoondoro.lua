@@ -14,4 +14,4 @@ gui.menu({'25 MIN ONLY',
           'EXIT'})
 print(gui.line(32, '-'))
 num = bin.readnum("Insira um número: ")
-bin.teste
+
