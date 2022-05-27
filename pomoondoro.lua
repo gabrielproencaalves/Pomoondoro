@@ -1,10 +1,17 @@
 #!/bin/lua
+bin.clear_scrn()
+
+--REQUIREMENTS--
+--    lua     --
+--   alsa     --
+--  alsa-lib  --
+--   mpg123   --
+
 gui = require "blibs.gui"
 bin = require "blibs.bin"
 audio_array = {'Dark','Dreams','Sunflower','Raindrops','Test Alarm'}
 
-
-bin.clear_scrn()
+bin.show_time()
 gui.title("POMOONDORO", 30, "-")
 gui.menu({'25 MIN ONLY',
           '5 MIN ONLY',
@@ -13,5 +20,6 @@ gui.menu({'25 MIN ONLY',
           'SET ALARM',
           'EXIT'})
 print(gui.line(32, '-'))
-num = bin.readnum("Insira um número: ")
+num = bin.readnum("Insira um número: ", "n")
+bin.notify("TAREFA CONCLUÍDA!", "O app foi executado com êxito!", 5000)
 

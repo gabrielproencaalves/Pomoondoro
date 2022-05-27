@@ -7,20 +7,30 @@ function bin.clear_scrn()
 end
 
 function bin.notify(title, msg, delay)
-	if title == nil then title = "Title" end
-	if  msg  == nil then msg   ="Message"end
-	if delay == nil then delay = 5000 end
-	os.execute(string.format("notify-send '%s' '%s' -t %d", title, msg, delay))
+	os.execute(string.format("notify-send '%s' '%s' -t %d", title or "Title", msg or "Message", delay or 5000))
 end
 
-function bin.readnum(text)
+function bin.read(text, param)
 	local insertion
-	while (insertion == nil) do
+	while (not insertion) do
 		print(text or "Insert: ")
-		insertion = io.read("number")
+		if param == "n" then insertion = io.read("number")
+		elseif param == "s" then insertion = io.read("string") end
 		io.read()
 	end
 	return insertion
+end
+
+function bin.readstr(text)
+	local insertion
+end
+
+function bin.play(file)
+	os.execute("mpg123 "..file)
+end
+
+function bin.show_time()
+	print(os.date("%Y-%m-%d %X"))
 end
 
 return bin
