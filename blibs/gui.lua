@@ -18,9 +18,7 @@ function gui.title(text, width, _char)-----title()
 		width = (width + (#text-width))+2
 	end
 	print(gui.line(width, _char))
-	for i =1, (width-#text)/2 do
-		text = " "..text
-	end
+	text = string.rep(" ", ((width-#text)//2))..text
 	print(text)
 	print(gui.line(width, _char))
 	

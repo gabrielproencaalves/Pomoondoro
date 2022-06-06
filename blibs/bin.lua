@@ -7,30 +7,45 @@ function bin.clear_scrn()
 end
 
 function bin.notify(title, msg, delay)
-	os.execute(string.format("notify-send '%s' '%s' -t %d", title or "Title", msg or "Message", delay or 5000))
+	title = title or "Title"
+	msg = msg or "Message"
+	delay = delay or 5000
+	os.execute(string.format("notify-send '%s' '%s' -t %d", title, msg, delay))
 end
 
-function bin.read(text, param)
+function bin.readnum(text)
 	local insertion
-	while (not insertion) do
-		print(text or "Insert: ")
-		if param == "n" then insertion = io.read("number")
-		elseif param == "s" then insertion = io.read("string") end
-		io.read()
-	end
+	print(text or ">")
+	--repeat
+	status, insertion = pcall(io.read, "*n")
+	io.read()
+	if not status then return bin.readnum(text) end
+	--until insertion
 	return insertion
 end
 
 function bin.readstr(text)
 	local insertion
+	if text then print(text) end
+	repeat
+		status, insertion = pcall(io.read, "*l")
+		io.read()
+	until insertion
+	return insertion
 end
 
 function bin.play(file)
-	os.execute("mpg123 "..file)
+	os.execute("mpg123 -q "..file)
+end
+
+function bin.sleep(value, __type)
+	if not value then value = 5 end
+	if not __type then __type = "s" end
+	os.execute(string.format("sleep %s", tostring(value)..__type))
 end
 
 function bin.show_time()
-	print(os.date("%Y-%m-%d %X"))
+	return os.date("%Y-%m-%d %X")
 end
 
 return bin
