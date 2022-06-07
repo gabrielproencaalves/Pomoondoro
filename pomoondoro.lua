@@ -9,15 +9,13 @@ fileman = require "blibs.file"
 audio_array = {"Dark","Dreams","Sunflower","Raindrops","Test Alarm"}
 
 function alarm(value, __type)
-	bin.sleep(value, __type or 's')
+	bin.loading(value, 32)
 	bin.notify("TIME OUT!", string.format("%d%s HAVE PASSED!", value, __type or 's'))
 	bin.play(fileman.readln("audio.conf"))
 end
 
-os.execute("clear")
-
 while true do
-		print(string.format("Last tindon: %s", bin.show_time()))
+		os.execute("clear")
 		gui.title("POMOONDORO", 32, "-")
 		gui.menu({"25 MIN ONLY",
 				  " 5 MIN ONLY",
@@ -26,20 +24,24 @@ while true do
 				  "SET AUDIO",
 				  "EXIT"})
 		print(gui.line(32, "-"))
-		user_choice = bin.readnum("Insira um número: ")
+		user_choice = bin.readnum("Insert a number: ")
 		if user_choice then
 			os.execute("clear")
 			if user_choice == 1 then
-				alarm(5, 's')
+				alarm(1500, 's')
 			elseif user_choice == 2 then
-				alarm(5, 's')
+				alarm(300, 's')
 			elseif user_choice == 3 then
-				alarm(5, 's')
-				alarm(5, 's')
+				alarm(1500, 's')
+				alarm(300, 's')
 			elseif user_choice == 4 then
 				while true do
-					alarm(5, 's')
-					alarm(5, 's')
+					alarm(1500, 's')
+					alarm(300, 's')
+					user_choice = string.lower(bin.readstr("Do you want to continue? [Y/N]"))
+					if string.sub(user_choice, 1, 1) == "n" then
+						break
+					end
 				end
 			elseif user_choice == 5 then
 				gui.title("SET AUDIO", 32, "-")
@@ -60,10 +62,8 @@ while true do
 				print("Invalid option! Try again...")
 			end
 		else
-			os.execute("clear")
 			print("Please, fill the data before proceed.")
+			bin.sleep(2.5)
 		end
-
+		print(string.format("Last alarm:  %s", bin.show_time()))
 end
---             adicionar função de registrar escolha do usuario
-bin.notify("TAREFA CONCLUÍDA!", "O app foi executado com êxito!", 1500)

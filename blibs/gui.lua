@@ -24,8 +24,8 @@ function gui.title(text, width, _char)-----title()
 	
 end
 
-function gui.menu(lista)-------------------menu()
-	for c, i in pairs(lista) do
+function gui.menu(list)-------------------menu()
+	for c, i in pairs(list) do
 		print(string.format("%d. %s", c, i))
 	end
 end
