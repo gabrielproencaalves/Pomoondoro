@@ -1,7 +1,7 @@
 # Pomoondoro
  <p>Fork of pymodoro made in Lua.</p>
 
-##requirements:
+## requirements:
 <ol>
 <li>lua</li>
 <li>mpg123</li>
