@@ -14,8 +14,8 @@ function alarm(value, __type)
 	bin.play(fileman.readln("audio.conf"))
 end
 
+os.execute("clear")
 while true do
-		os.execute("clear")
 		gui.title("POMOONDORO", 32, "-")
 		gui.menu({"25 MIN ONLY",
 				  " 5 MIN ONLY",
@@ -25,15 +25,19 @@ while true do
 				  "EXIT"})
 		print(gui.line(32, "-"))
 		user_choice = bin.readnum("Insert a number: ")
+		os.execute("clear")
 		if user_choice then
 			os.execute("clear")
 			if user_choice == 1 then
 				alarm(1500, 's')
+				last_alarm = "only (25min)"
 			elseif user_choice == 2 then
 				alarm(300, 's')
+				last_alarm = "only (5min)"
 			elseif user_choice == 3 then
 				alarm(1500, 's')
 				alarm(300, 's')
+				last_alarm = "both (25+5)"
 			elseif user_choice == 4 then
 				while true do
 					alarm(1500, 's')
@@ -43,6 +47,7 @@ while true do
 						break
 					end
 				end
+				last_alarm = "loop (25+5)"
 			elseif user_choice == 5 then
 				gui.title("SET AUDIO", 32, "-")
 				gui.menu(audio_array)
@@ -65,5 +70,5 @@ while true do
 			print("Please, fill the data before proceed.")
 			bin.sleep(2.5)
 		end
-		print(string.format("Last alarm:  %s", bin.show_time()))
+		print(string.format("LA: %s %s", bin.show_time(), last_alarm))
 end
